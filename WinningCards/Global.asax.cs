@@ -22,7 +22,7 @@ namespace WinningCards
             var tableName = "Logs";
 
             var log = new LoggerConfiguration()
-                .WriteTo.MSSqlServer(connectionString, tableName)
+                .WriteTo.MSSqlServer(connectionString, tableName, autoCreateSqlTable: true)
                 .CreateLogger();
         }
     }

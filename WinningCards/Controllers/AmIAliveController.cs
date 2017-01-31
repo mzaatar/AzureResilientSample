@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,7 @@ namespace WinningCards.Controllers
         // GET: api/AmIAlive
         public IEnumerable<string> Get()
         {
+            Log.Debug("Get Method");
             return new string[] { "value1", "value2" };
         }
 

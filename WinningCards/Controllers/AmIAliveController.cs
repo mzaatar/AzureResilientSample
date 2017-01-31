@@ -13,14 +13,14 @@ namespace WinningCards.Controllers
         // GET: api/AmIAlive
         public IEnumerable<string> Get()
         {
-            Log.Debug("Get Method");
+            Global.Logger.Debug("Get Method");
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/AmIAlive/5
         public string Get(int id)
         {
-            Log.Debug($"Get Method with id {id}");
+            Global.Logger.Debug($"Get Method with id {id}");
             return "value";
         }
 

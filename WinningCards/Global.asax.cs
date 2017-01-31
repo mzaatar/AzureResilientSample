@@ -5,11 +5,13 @@ using System.Web.Routing;
 using System.Web.Http;
 using Serilog;
 using System.Configuration;
+using Serilog.Core;
 
 namespace WinningCards
 {
     public class Global : HttpApplication
     {
+        public static Logger Logger;
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
@@ -17,11 +19,10 @@ namespace WinningCards
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-
             var connectionString = ConfigurationManager.ConnectionStrings["seqmssql"].ConnectionString;
             var tableName = "Logs";
 
-            var log = new LoggerConfiguration()
+            Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .WriteTo.MSSqlServer(connectionString, tableName, autoCreateSqlTable: true)
                 .CreateLogger();

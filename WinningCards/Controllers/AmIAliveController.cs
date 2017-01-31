@@ -20,6 +20,7 @@ namespace WinningCards.Controllers
         // GET: api/AmIAlive/5
         public string Get(int id)
         {
+            Log.Debug($"Get Method with id {id}");
             return "value";
         }
 

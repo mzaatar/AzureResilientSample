@@ -22,6 +22,7 @@ namespace WinningCards
             var tableName = "Logs";
 
             var log = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
                 .WriteTo.MSSqlServer(connectionString, tableName, autoCreateSqlTable: true)
                 .CreateLogger();
         }

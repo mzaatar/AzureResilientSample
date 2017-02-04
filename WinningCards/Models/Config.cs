@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace WinningCards.Models
 {
@@ -17,6 +18,30 @@ namespace WinningCards.Models
         public static string AppMachineName
         {
             get { return Environment.MachineName; }
+        }
+
+        public static string DefaultConenctionString
+        {
+            get { return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+        }
+
+        public static string DbServer
+        {
+            get
+            {
+                var connectString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+                return builder.DataSource;
+            }
+        }
+
+        public static string DbName
+        {
+            get {
+                var connectString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+                return builder.InitialCatalog;
+            }
         }
     }
 }

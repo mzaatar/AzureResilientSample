@@ -6,6 +6,7 @@ using System.Web.Http;
 using Serilog;
 using System.Configuration;
 using Serilog.Core;
+using WinningCards.Models;
 
 namespace WinningCards
 {
@@ -19,7 +20,7 @@ namespace WinningCards
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            var connectionString = ConfigurationManager.ConnectionStrings["seqmssql"].ConnectionString;
+            var connectionString = Config.DefaultConenctionString;
             var tableName = "Logs";
 
             Logger = new LoggerConfiguration()

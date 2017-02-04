@@ -14,29 +14,14 @@ namespace WinningCards.Controllers
         public IEnumerable<string> Get()
         {
             Global.Logger.Debug("Get Method");
-            return new string[] { "value1", "value2" };
+            return new string[] { };
         }
 
         // GET: api/AmIAlive/5
         public string Get(int id)
         {
-            Global.Logger.Debug($"Get Method with id {id}");
+            Global.Logger.Debug($"Get Method called with id {id}");
             return "value";
-        }
-
-        // POST: api/AmIAlive
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/AmIAlive/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/AmIAlive/5
-        public void Delete(int id)
-        {
         }
     }
 }

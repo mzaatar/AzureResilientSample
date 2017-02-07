@@ -14,14 +14,14 @@ namespace WinningCards.Controllers
         public IEnumerable<string> Get()
         {
             Global.Logger.Debug("Get Method");
-            return new string[] { };
+            return new string[] { "I'm alive, what about you?"};
         }
 
         // GET: api/AmIAlive/5
         public string Get(int id)
         {
             Global.Logger.Debug($"Get Method called with id {id}");
-            return "value";
+            return id.ToString();
         }
     }
 }

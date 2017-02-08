@@ -55,10 +55,11 @@ function IsSecondarySqlDatabase
     }
 }
 
-function DisableEnableTrafficManagerEndPoint([Int]$index, $EndpointName, $ProfileName, $Rg, $EnableOrDisableMode)
+function DisableEnableTrafficManagerEndPoint([Int] $index, $EndpointName, $ProfileName, $Rg, $EnableOrDisableMode)
 {
+	
     # Due to the error in cmd Disable-AzureRmTrafficManagerEndpoint we have to use this cmd
-	# $index 0= Melbourne, 1 = Sydney
+	# $index 1= Melbourne, 0 = Sydney
 	
 	$profile = Get-AzureRmTrafficManagerProfile -Name $ProfileName -ResourceGroupName $Rg
 	if($profile.Endpoints[$index].EndpointStatus -ne $EnableOrDisableMode)
@@ -132,24 +133,24 @@ try
 	}
 
 	Write-Output "Enabling/disabling Traffic Manager endpoints..."
-	# index 0 = Mel and 1 = Syd
+	# index 1 = Mel and 0 = Syd
 	if($mode -eq "Sydney")
 	{
 		Write-Output "Disable Melbourne endpoint and enable Sydney"
-		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Disabled"
-		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Disabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
 	}
 	elseif($mode -eq "Melbourne")
 	{
 		Write-Output "Disable Sydney endpoint and enable Melbourne"
-		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
-		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Disabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Disabled"
 	}
 	elseif($mode -eq "both")
 	{
 		Write-Output "Enable both Sydney and Melbourne"
-		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
-		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 1 -EndpointName $melEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
+		$null = DisableEnableTrafficManagerEndPoint -index 0 -EndpointName $sydEndPoint -ProfileName $trafficManagerProfileName -rg $trafficManagerRg -EnableOrDisableMode "Enabled"
 	}
 }
 catch 

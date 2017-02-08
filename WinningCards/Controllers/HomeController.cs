@@ -9,6 +9,7 @@ namespace WinningCards.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            Global.Logger.Debug("Home controller - Index view called");
             return View(new Config());
         }
     }

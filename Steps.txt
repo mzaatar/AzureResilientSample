@@ -1,0 +1,56 @@
+0-	Open your GitHub account and fork my repo "https://github.com/mzaatar/AzureResilientSample"
+1- 	Create two resource groups in Sydney and Melbourne named "Default-Mel-Rg" and "Default-Syd-Rg"
+2- 	Create a SQL DB servers in Sydney and Melbourne named "winningcardsmel" and "winningcardssyd"
+3- 	Create a SQL DB in Sydney server named "WinningCards" with "Standard" Pricing tier
+	Check: Add the client IP in the firewall and connect to it to test it is created
+4- 	Go to the created Db and click on "Overview" --> "Geo-Replication role" and select AustraliaSouthEast node and choose the Melbourne Db Server that you created before. Note to choose "Standard" pricing tier as well.
+	Check: Go to the SQL databases blade and make sure that the Sydney db now is Primary and Melbourne one is secondary
+5- 	Create two Webapps in "Standard" pricing tier in Sydney and Melbourne named "WinningCards-Mel" and "Winningcards-Syd"
+	- Add a connection string to both Syd and Mel WebApps as following: 
+		Name: "DefaultConnection"
+		Type: "SQLAzure"
+		Connectionstring: Point to Sydney DB "WinningCards"
+	- Add app settings entries for each WebApp:
+		- app.version = "0.1.0"
+		- app.environment = NameOfWebApps
+	Check: Browse "http://winningcards-syd.azurewebsites.net/" to check it is working
+	Check: Browse "http://winningcards-mel.azurewebsites.net/" to check it is working
+	Check: Open Sydney db and select * from Logs table to see the logging coming from the WebApp
+6-	Open each WebApp and click on "Deployment options" and choose GitHub. Choose the forked version of "AzureResilientSample" project and choose master branch to automate the deployment of this WebApp
+7- 	Create an Traffic Manager named "WinningCards" and configure it as following
+	- Open "Configuration" and set Routing Mode to "Weighted" and Path to be "/api/amialive"
+	- Add and endpoint with type "Azure endpoint", named as "Syd-AppService" and point to Sydney Webapps
+	- Add and endpoint with type "Azure endpoint", named as "Mel-AppService" and point to Melbourne Webapps
+	Check: Browse "http://winningcards.trafficmanager.net/" to make sure that it's working
+8- 	Go to "Automation" blade and add new Automation account and name it "AutomationAccount"
+9- 	Open the new created automation account and click on "Modules" and click on "Browse gallery" and search for these modules and click import:
+	AzureRM.Profile
+	AzureRM.Compute
+	AzureRM.Sql
+	AzureRM.Websites
+	AzureRM.TrafficManager
+	Check: open the modules tab again to see all modules are being extracted or the last modified date is today
+10- Open the new created automation account and click on "Variables" and add the following variables with the corresponding values according to your setup:
+	1- dbName
+	2- MelConString
+	3- melDbRg
+	4- melDbServer
+	5- String
+	6- melEndPoint
+	7- SubscriptionName
+	8- SydConString
+	9- SydDbRg
+	10- SydDbServer
+	11- sydEndPoint
+	12- trafficManagerProfileName
+	13- trafficManagerRg
+	14- webapp_mel_name
+	15- webapp_mel_rg
+	16- webapp_syd_name
+	17- webapp_syd_rg
+11- Open Automation Account and create a new RunBook of type "Powershell". Click on the edit button and copy and paste the contents of "SwitchEnvironments.ps1" script. 
+12- Now the setup is complete, you can run the "SwitchEnvironments" and see the environment being switched between Sydney and Melbourne
+13- Enjoy! 
+
+
+

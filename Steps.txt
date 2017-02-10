@@ -1,3 +1,5 @@
+Note that all the resources names shoudl be unique in Azure so please consider adding your initials before or after all the resource names.
+
 0-	Open your GitHub account and fork my repo "https://github.com/mzaatar/AzureResilientSample"
 1- 	Create two resource groups in Sydney and Melbourne named "Default-Mel-Rg" and "Default-Syd-Rg"
 2- 	Create a SQL DB servers in Sydney and Melbourne named "winningcardsmel" and "winningcardssyd"

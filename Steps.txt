@@ -1,4 +1,4 @@
-Note that all the resources names shoudl be unique in Azure so please consider adding your initials before or after all the resource names.
+Note that all the resources names should be unique in Azure so please consider adding your initials before or after all the resource names.
 
 0-	Open your GitHub account and fork my repo "https://github.com/mzaatar/AzureResilientSample"
 1- 	Create two resource groups in Sydney and Melbourne named "Default-Mel-Rg" and "Default-Syd-Rg"
@@ -7,7 +7,8 @@ Note that all the resources names shoudl be unique in Azure so please consider a
 	Check: Add the client IP in the firewall and connect to it to test it is created
 4- 	Go to the created Db and click on "Overview" --> "Geo-Replication role" and select AustraliaSouthEast node and choose the Melbourne Db Server that you created before. Note to choose "Standard" pricing tier as well.
 	Check: Go to the SQL databases blade and make sure that the Sydney db now is Primary and Melbourne one is secondary
-5- 	Create two Webapps in "Standard" pricing tier in Sydney and Melbourne named "WinningCards-Syd" and "Winningcards-Mel"
+5- 	Note that to create Pricing Tiers in Melbourne and Sydney
+	Create two Webapps in "Standard" pricing tier for Sydney and Melbourne named "WinningCards-Syd" and "Winningcards-Mel"
 	- Add a connection string to both Syd and Mel WebApps as following: 
 		Name: "DefaultConnection"
 		Type: "SQLAzure"
@@ -37,19 +38,18 @@ Note that all the resources names shoudl be unique in Azure so please consider a
 	2- MelConString
 	3- melDbRg
 	4- melDbServer
-	5- String
-	6- melEndPoint
-	7- SubscriptionName
-	8- SydConString
-	9- SydDbRg
-	10- SydDbServer
-	11- sydEndPoint
-	12- trafficManagerProfileName
-	13- trafficManagerRg
-	14- webapp_mel_name
-	15- webapp_mel_rg
-	16- webapp_syd_name
-	17- webapp_syd_rg
+	5- melEndPoint
+	6- SubscriptionName
+	7- SydConString
+	8- SydDbRg
+	9- SydDbServer
+	10- sydEndPoint
+	11- trafficManagerProfileName
+	12- trafficManagerRg
+	13- webapp_mel_name
+	14- webapp_mel_rg
+	15- webapp_syd_name
+	16- webapp_syd_rg
 11- Open Automation Account and create a new RunBook of type "Powershell". Click on the edit button and copy and paste the contents of "SwitchEnvironments.ps1" script. 
 12- Now the setup is complete, you can run the "SwitchEnvironments" and see the environment being switched between Sydney and Melbourne
 13- Enjoy! 

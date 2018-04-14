@@ -25,6 +25,16 @@ namespace WinningCards.Models
             get { return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
         }
 
+        public static SqlConnection DbServerConnection
+        {
+            get
+            {
+                var connectString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+                return new SqlConnection(builder.ConnectionString);
+            }
+        }
+
         public static string DbServer
         {
             get

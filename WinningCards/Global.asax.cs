@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Http;
 using Serilog;
-using System.Configuration;
 using Serilog.Core;
 using WinningCards.Models;
 

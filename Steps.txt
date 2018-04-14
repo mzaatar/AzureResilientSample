@@ -7,8 +7,10 @@ Note that all the resources names should be unique in Azure so please consider a
 	Check: Add the client IP in the firewall and connect to it to test it is created
 4- 	Go to the created Db and click on "Overview" --> "Geo-Replication role" and select AustraliaSouthEast node and choose the Melbourne Db Server that you created before. Note to choose "Standard" pricing tier as well.
 	Check: Go to the SQL databases blade and make sure that the Sydney db now is Primary and Melbourne one is secondary
+	April 2018 update: you can skip creating Melbourne server and db. It can be created using the geo-replication wizard.
+	Failover group: 
 5- 	Note that to create Pricing Tiers in Melbourne and Sydney
-	Create two Webapps in "Standard" pricing tier for Sydney and Melbourne named "WinningCards-Syd" and "Winningcards-Mel"
+	Create two WebApps in "Standard" pricing tier for Sydney and Melbourne named "WinningCards-Syd" and "WinningCards-Mel"
 	- Add a connection string to both Syd and Mel WebApps as following: 
 		Name: "DefaultConnection"
 		Type: "SQLAzure"

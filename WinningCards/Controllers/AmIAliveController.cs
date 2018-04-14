@@ -1,10 +1,7 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using WinningCards.Models;
 
 namespace WinningCards.Controllers
 {
@@ -13,8 +10,22 @@ namespace WinningCards.Controllers
         // GET: api/AmIAlive
         public IEnumerable<string> Get()
         {
-            Global.Logger.Debug("Get Method");
-            return new string[] { "I'm alive, what about you?"};
+            try
+            {
+                using (var sqlCon = Config.DbServerConnection)
+                {
+                    sqlCon.Open();
+                    sqlCon.Close();
+                }
+
+                Global.Logger.Debug("Get Method");
+                return new string[] { "I'm alive, what about you?" };
+            }
+            catch(Exception ex)
+            {
+                Global.Logger.Error($"Exception: {ex.Message}");
+                return new string[] { "Error, please check the logs" };
+            }
         }
 
         // GET: api/AmIAlive/5

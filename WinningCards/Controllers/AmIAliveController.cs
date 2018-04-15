@@ -20,21 +20,14 @@ namespace WinningCards.Controllers
                     sqlCon.Close();
                 }
 
-                Global.Logger.Debug("Get Method");
+                Global.Logger.Verbose("Am I Alive Ctrl - {Config.AppEnvironment}", Config.AppEnvironment);
                 return Ok( new { message = "I'm alive, what about you?" });
             }
             catch(Exception ex)
             {
-                Global.Logger.Error($"Exception: {ex.Message}");
+                Global.Logger.Error("Exception: {Config.AppEnvironment} {ex.Message}", Config.AppEnvironment, ex.Message);
                 return new ResponseMessageResult( new HttpResponseMessage( HttpStatusCode.InternalServerError)); // new string[] { "Error, please check the logs" };
             }
-        }
-
-        // GET: api/AmIAlive/5
-        public string Get(int id)
-        {
-            Global.Logger.Debug($"Get Method called with id {id}");
-            return id.ToString();
         }
     }
 }

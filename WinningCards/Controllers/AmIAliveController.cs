@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 using WinningCards.Models;
 
 namespace WinningCards.Controllers
@@ -8,7 +10,7 @@ namespace WinningCards.Controllers
     public class AmIAliveController : ApiController
     {
         // GET: api/AmIAlive
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
             try
             {
@@ -19,12 +21,12 @@ namespace WinningCards.Controllers
                 }
 
                 Global.Logger.Debug("Get Method");
-                return new string[] { "I'm alive, what about you?" };
+                return Ok( new { message = "I'm alive, what about you?" });
             }
             catch(Exception ex)
             {
                 Global.Logger.Error($"Exception: {ex.Message}");
-                return new string[] { "Error, please check the logs" };
+                return new ResponseMessageResult( new HttpResponseMessage( HttpStatusCode.InternalServerError)); // new string[] { "Error, please check the logs" };
             }
         }
 
